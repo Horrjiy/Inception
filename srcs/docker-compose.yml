@@ -1,0 +1,59 @@
+services:
+  mariadb:
+    build: ./requirements/mariadb/.
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MDB_ROOT_PASSWORD}
+      MARIADB_USER: ${MDB_USER}
+      MARIADB_PASSWORD: ${MDB_PASSWORD}     
+      MARIADB_DATABASE: ${MDB_DATABASE}
+    volumes:
+      - mdb_data:/var/lib/mysql
+    restart: always
+    networks:
+      - mpoplow_network
+
+  nginx:
+    build: ./requirements/nginx/.
+    container_name: nginx
+    depends_on:
+      - wordpress
+    ports:
+     - "443:443"
+    restart: always
+    networks:
+      - mpoplow_network
+    
+  wordpress:
+    build: ./requirements/wordpress/.
+    container_name: wordpress
+    environment:
+      WORDPRESS_DB_ROOT_PASSWORD: ${MDB_ROOT_PASSWORD}
+      WORDPRESS_DB_USER: ${MDB_USER}
+      WORDPRESS_DB_PASSWORD: ${MDB_PASSWORD}     
+      WORDPRESS_DB_DATABASE: ${MDB_DATABASE}
+      WORDPRESS_DB_HOST: ${DBHOST}
+    depends_on:
+      - mariadb
+    volumes:
+      - wp_data:/var/www/html
+    restart: always 
+    networks:
+      - mpoplow_network
+
+volumes:
+  mdb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mpoplow/data/mariadb
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mpoplow/data/wordpress
+
+networks:
+  mpoplow_network
