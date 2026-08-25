@@ -56,4 +56,4 @@ volumes:
       device: /home/mpoplow/data/wordpress
 
 networks:
-  mpoplow_network
+  mpoplow_network:

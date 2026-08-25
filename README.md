@@ -43,8 +43,9 @@ A PHP process manager that executes PHP scripts and communicates with web server
 https://docs.docker.com/reference/cli/docker/compose/
 https://hub.docker.com/_/mariadb
 https://www.debian.org/releases/bookworm/
-
-
+https://www.nginx.com/resources/wiki/start/
+https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+https://wiki.debian.org/Nginx/DirectoryStructure
 
 ## AI declaration
 AI was used to answer questions and to explain unknown/new concepts. 
