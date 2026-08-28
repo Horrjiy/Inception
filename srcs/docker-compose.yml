@@ -2,20 +2,28 @@ services:
   mariadb:
     build: ./requirements/mariadb/.
     container_name: mariadb
+    image: mariadb
     environment:
-      MARIADB_ROOT_PASSWORD: ${MDB_ROOT_PASSWORD}
-      MARIADB_USER: ${MDB_USER}
-      MARIADB_PASSWORD: ${MDB_PASSWORD}     
-      MARIADB_DATABASE: ${MDB_DATABASE}
+      MDB_ROOT_PASSWORD: ${MDB_ROOT_PASSWORD}
+      MDB_USER: ${MDB_USER}
+      MDB_PASSWORD: ${MDB_PASSWORD}     
+      MDB_DATABASE: ${MDB_DATABASE}
     volumes:
       - mdb_data:/var/lib/mysql
     restart: always
     networks:
       - mpoplow_network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -u${MDB_USER} -p${MDB_PASSWORD} --silent"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 
   nginx:
     build: ./requirements/nginx/.
     container_name: nginx
+    image: nginx
     depends_on:
       - wordpress
     ports:
@@ -27,14 +35,20 @@ services:
   wordpress:
     build: ./requirements/wordpress/.
     container_name: wordpress
+    image: wordpress
     environment:
-      WORDPRESS_DB_ROOT_PASSWORD: ${MDB_ROOT_PASSWORD}
-      WORDPRESS_DB_USER: ${MDB_USER}
-      WORDPRESS_DB_PASSWORD: ${MDB_PASSWORD}     
-      WORDPRESS_DB_DATABASE: ${MDB_DATABASE}
-      WORDPRESS_DB_HOST: ${DBHOST}
+      MDB_ROOT_PASSWORD: ${MDB_ROOT_PASSWORD}
+      MDB_USER: ${MDB_USER}
+      MDB_PASSWORD: ${MDB_PASSWORD}     
+      MDB_DATABASE: ${MDB_DATABASE}
+      DBHOST: ${DBHOST}
+      WPAD_USER: ${WPAD_USER}
+      WPAD_EMAIL: ${WPAD_EMAIL}
+      WPAD_PASSWORD: ${WPAD_PASSWORD}
+      ZWEIER_PASSWORD: ${ZWEIER_PASSWORD}
     depends_on:
-      - mariadb
+      mariadb:
+          condition: service_healthy
     volumes:
       - wp_data:/var/www/html
     restart: always 
