@@ -43,6 +43,12 @@ DOCKER VOLUMES are a way to preserve data outside docker containers. Volumes dec
 BIND MOUNTS are a subtype of volumes, mapping a directory from your host machine directly into a container. When the container writes to that mounted path, the changes are immediately visible on your host filesystem.
 
 # INSTRUCTIONS
+Find instructions how to use the project in the USER_DOC:  
+[User Documentation](USER_DOC.md)
+
+Find Instructions in the DEV_DOC:  
+[Developer Documentation](USER_DOC.md)
+
 
 # RESOURCES
 https://docs.docker.com/reference/cli/docker/compose/
