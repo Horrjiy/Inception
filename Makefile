@@ -20,4 +20,6 @@ fclean: down
 	sudo rm -rf $(DATA_DIR)/mariadb $(DATA_DIR)/wordpress
 	rm -rf $(DATA_DIR)
 
-.PHONY: all up down reup fclean
+re: fclean up
+
+.PHONY: all up down reup fclean re

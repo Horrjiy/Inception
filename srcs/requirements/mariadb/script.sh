@@ -14,7 +14,8 @@ EOF
 
 kill "$SERVER_PID"
 wait "$SERVER_PID"
-exec mariadbd --user=root
+
+exec mariadbd --user=root --bind-address=0.0.0.0
 
 ## DEBUG
 

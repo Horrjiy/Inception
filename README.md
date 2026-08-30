@@ -3,7 +3,7 @@ _This project has been created as part of the 42 curriculum by mpoplow_
 # DESCRIPTION
 
 ## Overview
-### Project
+### The Project:
 Inception provides a self-contained WordPress website infrastructure, with NGINX handling HTTPS traffic, WordPress/PHP-FPM serving the site, and MariaDB storing its data. The services communicate through a Docker network, while the website files and database persist independently of the containers.
 
 ### Docker: 
@@ -27,15 +27,20 @@ A PHP-based content management system used to create and manage websites.
 ### PHP-FPM: 
 A PHP process manager that executes PHP scripts and communicates with web servers such as NGINX.
 
-##
+## Important differences
 ### Virtual Machines vs Docker
+Virtual Machines emulate entire operating systems, requiring significant resources and slow startup times. Docker containers share the host's kernel, running isolated applications with minimal overhead and instant startup, making them lightweight and efficient alternatives to VMs.
 
 ### Secrets vs Environment Variables
+Environment variables are plaintext values accessible to containers and visible in logs, suitable for non-sensitive configuration. Secrets are encrypted sensitive data (passwords, tokens, keys) with restricted access, designed to keep sensitive information secure and hidden from logs and processes.
 
 ### Docker Network vs Host Network
+A Docker network is a virtual network created by Docker that allows containers to communicate with each other using container names as hostnames,  while remaining isolated from external networks. It was used in this project because of the isolation and flexibility.
+A host network bypasses Docker's networking layer entirely, allowing a container to share the host machine's network stack directly. This means the container uses the host's IP address and ports.
 
 ### Docker Volumes vs Bind Mounts
-
+DOCKER VOLUMES are a way to preserve data outside docker containers. Volumes decouple data from the container lifecycle, allowing you to preserve databases, configurations, and user uploads independently, even if the container is deleted.
+BIND MOUNTS are a subtype of volumes, mapping a directory from your host machine directly into a container. When the container writes to that mounted path, the changes are immediately visible on your host filesystem.
 
 # INSTRUCTIONS
 
@@ -48,4 +53,4 @@ https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
 https://wiki.debian.org/Nginx/DirectoryStructure
 
 ## AI declaration
-AI was used to answer questions and to explain unknown/new concepts. 
+AI was mainly used to answer questions and to explain unknown/new concepts. Later it was also used for generating text and spotting bugs.

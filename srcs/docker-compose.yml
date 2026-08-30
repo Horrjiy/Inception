@@ -27,7 +27,9 @@ services:
     depends_on:
       - wordpress
     ports:
-     - "443:443"
+      - "443:443"
+    volumes:
+      - wp_data:/var/www/html:rw
     restart: always
     networks:
       - mpoplow_network

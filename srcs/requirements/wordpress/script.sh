@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-
-
 if  wp core is-installed --allow-root ; then  
     echo "wordpress has already been set up!"
 else
