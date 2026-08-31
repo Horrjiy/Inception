@@ -27,6 +27,9 @@ A PHP-based content management system used to create and manage websites.
 ### PHP-FPM: 
 A PHP process manager that executes PHP scripts and communicates with web servers such as NGINX.
 
+### TLSv1.2 TLSv1.3:
+TLS stands for Transport Layer Security. They are secure protocols that encrypt HTTPS traffic, with 1.3 being faster, simpler, and more secure.
+
 ## Important differences
 ### Virtual Machines vs Docker
 Virtual Machines emulate entire operating systems, requiring significant resources and slow startup times. Docker containers share the host's kernel, running isolated applications with minimal overhead and instant startup, making them lightweight and efficient alternatives to VMs.
